@@ -1,0 +1,36 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Author
+{
+    class WordProcesser
+    {
+        public static void CountOccurrencesInSentence(string strSentence)
+        {
+            try
+            { 
+                    //split options  "space" seperated values or any special character if want to omit them 
+                    var arrayOfSplitOptions = new string[] { " ", ",", "." };
+
+                    //Fill the words in array (replace "," in sentence, remove empty entries)
+                    var arrayOfWords = strSentence.ToLower().Replace(",", "").Split(arrayOfSplitOptions, StringSplitOptions.RemoveEmptyEntries);
+
+                    //Fill key (word), value (count) pairs  Dictionary<string, int> 
+                    var dictionary = arrayOfWords.GroupBy(x => x).ToDictionary(g => g.Key, g => g.Count());
+
+                    //Iterate the dictionary 
+                    Console.WriteLine("\nOutput:\n--------------------");
+                    foreach (KeyValuePair<string, int> item in dictionary)
+                    {
+                        Console.WriteLine("{0} - {1}", item.Key, item.Value);
+                    }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error occured in CountOccurrencesInSentence:" + ex.Message);
+                throw;
+            }
+        }
+    }
+}
