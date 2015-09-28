@@ -1,0 +1,35 @@
+using System;
+namespace Author
+{
+    class WordProcessorMain
+    {
+        static void Main()
+        {
+            try
+            { 
+                    Console.WriteLine("Enter a sentence and press enter to count occurences of word");
+                    Console.WriteLine("\nInput:\n--------------------");            
+                    //Enter the sentence
+                    var strSentence = Console.ReadLine();
+            
+                    //Check if the sentence is blank
+                    if (strSentence.Trim().Length <= 0)
+                    {
+                        Console.WriteLine("You have entered blank sentence. Please try again..!");
+                        Console.WriteLine("\nInput:\n--------------------"); 
+                        strSentence = Console.ReadLine();
+                    }
+
+                    //Calculate the occurrences of word in sentences 
+                    WordProcesser.CountOccurrencesInSentence(strSentence);                       
+            
+                    Console.WriteLine("\n\nPress enter to exit..");  
+                    Console.ReadLine();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error occured :" + ex.Message);  
+            }
+        }      
+    }
+ }
