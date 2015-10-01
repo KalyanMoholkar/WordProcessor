@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Author
 {
-    class WordProcessor
+    public  class WordProcessor
     {
         static void Main()
         {
@@ -35,19 +35,18 @@ namespace Author
                 Console.WriteLine("Error occured :" + ex.Message);  
             }
         }
-        public static void CountOccurrencesInSentence(string strSentence)
+        private  static void CountOccurrencesInSentence(string strSentence)
         {
             try
             {
                 //split options  "space" seperated values or any special character if want to omit them 
                 var arrayOfSplitOptions = new string[] { " ", ",", "." };
 
-                //Fill the words in array (replace "," in sentence, remove empty entries)
-                var arrayOfWords = strSentence.ToLower().Replace(",", "").Split(arrayOfSplitOptions, StringSplitOptions.RemoveEmptyEntries);
-
                 //Fill key (word), value (count) pairs  Dictionary<string, int> 
-                var dictionary = arrayOfWords.GroupBy(x => x).ToDictionary(g => g.Key, g => g.Count());
-
+                var dictionary = Calculate_WordCount(strSentence);
+                
+                
+  
                 //Iterate the dictionary 
                 Console.WriteLine("\nOutput:\n--------------------");
                 foreach (KeyValuePair<string, int> item in dictionary)
@@ -58,6 +57,27 @@ namespace Author
             catch (Exception ex)
             {
                 Console.WriteLine("Error occured in CountOccurrencesInSentence:" + ex.Message);
+                throw;
+            }
+        }
+        public static Dictionary<string,int>  Calculate_WordCount(string sentence)
+        {
+            try
+            {
+                //split options  "space" seperated values or any special character if want to omit them 
+                var arrayOfSplitOptions = new string[] { " ", ",", "." };
+
+                //Fill the words in array (replace "," in sentence, remove empty entries)
+                var arrayOfWords = sentence.ToLower().Replace(",", "").Split(arrayOfSplitOptions, StringSplitOptions.RemoveEmptyEntries);
+
+                //Fill key (word), value (count) pairs  Dictionary<string, int> 
+                var dictionary = arrayOfWords.GroupBy(x => x).ToDictionary(g => g.Key, g => g.Count());
+
+                return dictionary;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error occured in Calculate_WordCount:" + ex.Message);
                 throw;
             }
         }
