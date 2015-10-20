@@ -14,7 +14,8 @@ namespace Author
         {
             //Step1: arrange 
             //test input
-            var sentence = "This is a statement, and so is this.";
+            var line = "This is a statement, and so is this.";
+            IWordProcessor wordProcessor = new WordProcessor();
 
             //expected output            
             var expectedDictionary=new System.Collections.Generic.Dictionary<string, int> 
@@ -29,19 +30,21 @@ namespace Author
             
             //Step2: act
             //Calculate the word count and store in dictionary
-            var outputDictionary = WordProcessor.Calculate_WordCount(sentence);
+            var outputDictionary = wordProcessor.CalculateWordCount(line);
             
             // Step3: assert 
             //compare expected dictionary and actual dictionary derived from sentence
             Assert.IsTrue(expectedDictionary.SequenceEqual(outputDictionary));
               
         }
+
         [TestMethod]
         public void Validate_WordCount_InSentence_NegativeTesting()
         {
             //Step1: arrange 
             //test input
-            var sentence = "This is a statement, and so is this.";
+            var line = "This is a statement, and so is this.";
+            IWordProcessor wordProcessor = new WordProcessor();
 
             //expected output            
             var expectedDictionary = new System.Collections.Generic.Dictionary<string, int> 
@@ -56,7 +59,7 @@ namespace Author
 
             //Step2: act
             //Calculate the word count and store in dictionary
-            var outputDictionary = WordProcessor.Calculate_WordCount(sentence);
+            var outputDictionary = wordProcessor.CalculateWordCount(line);
 
             // Step3: assert 
             //compare expected dictionary and actual dictionary derived from sentence
